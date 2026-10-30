@@ -128,6 +128,7 @@ docker compose -f ops/docker-compose.yml exec postgres \
 | Palm Grove Retail | `owner@palmgroveretail.example` |
 | Seef Kiosk Partners | `owner@seefkiosk.example` |
 
+
 `owner@alpharetail.example` belongs to two merchants, which is why login
 asks for the merchant ID as well as the email.
 
