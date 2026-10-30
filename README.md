@@ -174,14 +174,11 @@ cd apps/settlement && go test -short ./...
 Use a dedicated test database: the TypeScript suites share it and write
 outbox events, merchants and ledger rows.
 
-## Helper scripts
+## Helper script
 
-- `node create-merchant.cjs --dry-run`: signs up a merchant on the hosted
-  API. Copy `merchant-details.example.json` to `merchant-details.json`
-  first (gitignored).
-- `node check-admin-login.cjs`: checks step 1 of the hosted admin login.
-
-They are `.cjs` because the repository is an ES module package.
+`node create-merchant.cjs --dry-run` signs up a merchant on the hosted API.
+Copy `merchant-details.example.json` to `merchant-details.json` first
+(gitignored). It is `.cjs` because the repository is an ES module package.
 
 ## Money and settlement conventions
 
@@ -204,5 +201,5 @@ commands, environment variables, nginx and known platform issues, and
 - **Adjustment CSV amounts:** the parser used a two-decimal default and read
   `4.75` BHD as 475 fils instead of 4,750. `parseAdjustmentAmountFils` now
   delegates to `parseBhdToFils`.
-- **Commit graph:** `git --no-pager log --graph > git-history.txt` writes a
-  local snapshot; the file is gitignored.
+- **Commit graph:** run `git --no-pager log --graph` to see it; there is no
+  need to keep a copy in the repository.
