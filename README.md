@@ -117,7 +117,34 @@ docker compose -f ops/docker-compose.yml exec postgres \
   "select m.id, m.display_name, u.email, u.role from merchant_users u join merchants m on m.id = u.merchant_id order by 2, 4"
 ```
 
-For example `owner@alpharetail.example` (Alpha Retail Co).
+| Merchant | Logins (password `FilsPaySeed!2026`) |
+|---|---|
+| Alpha Retail Co | `owner@alpharetail.example`, `finance@alpharetail.example` |
+| Beta Digital Services | `owner@betadigital.example`, `finance@betadigital.example`, `support@betadigital.example`, `owner@alpharetail.example` |
+| Coral Bay Traders | `owner@coralbaytraders.example` |
+| Delta Marketplace Bahrain | `owner@deltamarketplace.example`, `finance@deltamarketplace.example` |
+| Delta Wholesale Traders | `owner@deltawholesale.example`, `finance@deltawholesale.example` |
+| Gamma Hospitality Group | `owner@gammahospitality.example`, `finance@gammahospitality.example` |
+| Palm Grove Retail | `owner@palmgroveretail.example` |
+| Seef Kiosk Partners | `owner@seefkiosk.example` |
+
+`owner@alpharetail.example` belongs to two merchants, which is why login
+asks for the merchant ID as well as the email.
+
+## Live demo accounts
+
+The hosted demo has its own accounts. None of the seed fixtures above exist
+there.
+
+| Account | Sign in at | Email | Merchant ID |
+|---|---|---|---|
+| Admin (super admin) | [fp-admin-tzakir.dilmune.app/login](https://fp-admin-tzakir.dilmune.app/login) | `admin@filspay.demo` | — |
+| Merchant owner, FilsPay Demo Store | [fp-pay-tzakir.dilmune.app/dashboard/login](https://fp-pay-tzakir.dilmune.app/dashboard/login) | `owner@filspay.demo` | `6ebe3a11-e6d4-40ac-8098-7f5c75f7563f` |
+
+Passwords are **not** in this repository, which is public: on the live site
+the login page shows the one-time code (`OTP_DEV_EXPOSE`, see bug #22 in
+[`bugs.md`](bugs.md)), so a published password would be enough to take over
+the account. Ask the repository owner for them.
 
 ## Try a payment
 
