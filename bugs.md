@@ -32,6 +32,7 @@ needs action) · **Open**
 | 19 | API dev webhook key was 34 bytes, so the API couldn't boot in dev without one | Medium | Fixed |
 | 20 | Local compose ran every Node service as `NODE_ENV=production` | Medium | Fixed |
 | 21 | Settlement logs "next check-in ~tomorrow" but re-runs every minute | Low | Open |
+| 22 | Production has no way to deliver login codes (no email/SMS) | High | Mitigated |
 
 ## Details
 
@@ -216,6 +217,19 @@ needs action) · **Open**
 - **Next:** check `apps/settlement/internal/scheduler` to see whether the
   re-run is intended (idempotent poll) and fix whichever is wrong, the
   log or the loop.
+
+### 22. Login codes can't be delivered in production — Mitigated
+- **What:** every admin and merchant login needs a one-time code, but
+  `apps/api/src/auth/notifier.ts` is a stub: in production it logs only
+  "otp code generated" (no code) and nothing sends email or SMS. Nobody
+  could log in to the live site.
+- **Workaround (demo only):** `OTP_DEV_EXPOSE=true` on the fp-api site, so
+  the login response (and page) shows the code. The second step then adds
+  no security: the password alone gets in.
+- **Verified:** demo admin and demo merchant both log in over HTTPS
+  (password → code → verify → `/me` 200).
+- **Next:** add a real email sender for codes, then remove
+  `OTP_DEV_EXPOSE` before handling real money.
 
 ## Incidents during the fix
 
