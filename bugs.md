@@ -33,6 +33,8 @@ needs action) · **Open**
 | 20 | Local compose ran every Node service as `NODE_ENV=production` | Medium | Fixed |
 | 21 | Settlement logs "next check-in ~tomorrow" but re-runs every minute | Low | Open |
 | 22 | Production has no way to deliver login codes (no email/SMS) | High | Mitigated |
+| 23 | fp-pay `/` and unknown paths showed React Router's error screen | Medium | Fixed |
+| 24 | API root `/` returned "Route GET:/ not found" | Low | Fixed |
 
 ## Details
 
@@ -230,6 +232,20 @@ needs action) · **Open**
   (password → code → verify → `/me` 200).
 - **Next:** add a real email sender for codes, then remove
   `OTP_DEV_EXPOSE` before handling real money.
+
+### 23. fp-pay had no root or 404 page — Fixed
+- **What:** the router had no `/` route and no catch-all, so the site's own
+  address and any mistyped link showed "Unexpected Application Error! 404".
+- **Fix (056a82a):** `/` redirects to `/dashboard` (login when signed
+  out); any unknown path renders a "Page not found" page.
+- **Verified:** live bundle contains both; typecheck and build pass.
+
+### 24. API root returned 404 — Fixed
+- **What:** opening `https://fp-api-tzakir.dilmune.app/` showed
+  `Route GET:/ not found` (19 hits in a day), which looks broken.
+- **Fix (056a82a):** `GET /` returns `{service, status, health, readiness, api}`;
+  test in `apps/api/src/routes/health.test.ts`.
+- **Verified:** live `/` returns 200; full suite 453/453.
 
 ## Incidents during the fix
 
