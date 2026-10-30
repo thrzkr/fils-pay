@@ -117,6 +117,9 @@ docker compose -f ops/docker-compose.yml exec postgres \
   "select m.id, m.display_name, u.email, u.role from merchant_users u join merchants m on m.id = u.merchant_id order by 2, 4"
 ```
 
+Local only (http://localhost:5173 and :5174). These passwords do **not**
+work on the live site; see [Live demo accounts](#live-demo-accounts).
+
 | Merchant | Logins (password `FilsPaySeed!2026`) |
 |---|---|
 | Alpha Retail Co | `owner@alpharetail.example`, `finance@alpharetail.example` |
@@ -134,13 +137,26 @@ asks for the merchant ID as well as the email.
 
 ## Live demo accounts
 
-The hosted demo has its own accounts. None of the seed fixtures above exist
-there.
+The hosted demo has its own accounts with their own passwords. The seed
+passwords above don't work there.
 
-| Account | Sign in at | Email | Merchant ID |
-|---|---|---|---|
-| Admin (super admin) | [fp-admin-tzakir.dilmune.app/login](https://fp-admin-tzakir.dilmune.app/login) | `admin@filspay.demo` | — |
-| Merchant owner, FilsPay Demo Store | [fp-pay-tzakir.dilmune.app/dashboard/login](https://fp-pay-tzakir.dilmune.app/dashboard/login) | `owner@filspay.demo` | `6ebe3a11-e6d4-40ac-8098-7f5c75f7563f` |
+**Admin console** ([fp-admin-tzakir.dilmune.app/login](https://fp-admin-tzakir.dilmune.app/login)):
+`admin@filspay.demo` (super admin).
+
+**Merchant dashboard** ([fp-pay-tzakir.dilmune.app/dashboard/login](https://fp-pay-tzakir.dilmune.app/dashboard/login)),
+one owner login per merchant:
+
+| Merchant | Owner email | Merchant ID |
+|---|---|---|
+| FilsPay Demo Store | `owner@filspay.demo` | `6ebe3a11-e6d4-40ac-8098-7f5c75f7563f` |
+| Alpha Retail Co | `owner@alpharetail.example` | `aad380fb-660c-417f-b98d-1cd321fdbb3e` |
+| Beta Digital Services | `owner@betadigital.example` | `7daed4ec-842c-4d23-8cbe-62c4b76e3561` |
+| Coral Bay Traders | `owner@coralbaytraders.example` | `56cf5da2-4206-4354-843d-630148368422` |
+| Delta Marketplace Bahrain | `owner@deltamarketplace.example` | `44ec0bb8-3a66-4ec6-8a5a-421684e407f0` |
+| Delta Wholesale Traders | `owner@deltawholesale.example` | `225c1f2f-843c-42bd-8f38-3d39cccd7a10` |
+| Gamma Hospitality Group | `owner@gammahospitality.example` | `3afe3149-0247-498f-bbc3-3e79d34e155b` |
+| Palm Grove Retail | `owner@palmgroveretail.example` | `80ce79fd-888a-48fd-b2df-305be01e50b1` |
+| Seef Kiosk Partners | `owner@seefkiosk.example` | `05c1dd7e-6e28-4628-a2f4-247e386145d2` |
 
 Passwords are **not** in this repository, which is public: on the live site
 the login page shows the one-time code (`OTP_DEV_EXPOSE`, see bug #22 in
