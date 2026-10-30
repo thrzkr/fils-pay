@@ -6,10 +6,11 @@ import { formatBhd, toFils } from "@filspay/money";
  * so there is exactly one answer to "how is a BHD amount shown" across both
  * halves of this app. Never `/1000`, never `toFixed`.
  */
-// FH: toFils without allowNegative throws on a negative — refund events / negative gaps crash the page?
-// MK: amounts are never negative in the dashboard. ignore
+// Display only, so negatives are allowed: refund events in the transaction
+// timeline are signed deltas (a 5.000 BD refund is -5000), and reconciliation
+// gaps can be negative. Rejecting them crashed the page after any refund.
 export function bhd(amountFils: number): string {
-  return `${formatBhd(toFils(amountFils))} BHD`;
+  return `${formatBhd(toFils(amountFils, { allowNegative: true }))} BHD`;
 }
 
 /** `—` for a null/absent value, so an empty table cell is visibly empty

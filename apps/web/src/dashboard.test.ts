@@ -64,3 +64,9 @@ test("localDateTimeToIso rejects garbage instead of sending Invalid Date", () =>
   assert.notEqual(iso, null);
   assert.equal(new Date(iso ?? "").getTime(), new Date("2026-09-12T14:30").getTime());
 });
+
+test("bhd shows signed amounts, so a refund event does not crash the transaction page", () => {
+  assert.equal(bhd(-5000), "-5.000 BHD");
+  assert.equal(bhd(-12500), "-12.500 BHD");
+  assert.equal(bhd(-1), "-0.001 BHD");
+});
