@@ -140,6 +140,28 @@ asks for the merchant ID as well as the email.
 The hosted demo has its own accounts with their own passwords. The seed
 passwords above don't work there.
 
+### Log in as a merchant (public demo login)
+
+This one account is meant to be shared, so its password is published here.
+It holds simulated money only.
+
+1. Open [fp-pay-tzakir.dilmune.app/dashboard/login](https://fp-pay-tzakir.dilmune.app/dashboard/login).
+2. Enter:
+
+   | Field | Value |
+   |---|---|
+   | Merchant ID | `94850160-a3f5-4377-a260-af4fe28e7743` |
+   | Email | `demo@filspay.demo` |
+   | Password | `FilsPayDemo!2026` |
+
+3. Select **Continue**. The page shows a 6-digit code; enter it to finish.
+
+Anyone can use this login, so expect other people's test data in it.
+
+### Private live accounts
+
+The accounts below have private passwords, kept by the repository owner.
+
 **Admin console** ([fp-admin-tzakir.dilmune.app/login](https://fp-admin-tzakir.dilmune.app/login)):
 `admin@filspay.demo` (super admin).
 
@@ -158,7 +180,7 @@ one owner login per merchant:
 | Palm Grove Retail | `owner@palmgroveretail.example` | `80ce79fd-888a-48fd-b2df-305be01e50b1` |
 | Seef Kiosk Partners | `owner@seefkiosk.example` | `05c1dd7e-6e28-4628-a2f4-247e386145d2` |
 
-Passwords are **not** in this repository, which is public: on the live site
+Their passwords are **not** in this repository, which is public: on the live site
 the login page shows the one-time code (`OTP_DEV_EXPOSE`, see bug #22 in
 [`bugs.md`](bugs.md)), so a published password would be enough to take over
 the account. Ask the repository owner for them.
