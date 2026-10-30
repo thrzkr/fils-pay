@@ -17,9 +17,14 @@ import { SettlementBatchListPage } from "./pages/settlement/SettlementBatchListP
 import { SettlementBatchDetailPage } from "./pages/settlement/SettlementBatchDetailPage.js";
 import { ReconciliationPage } from "./pages/settlement/ReconciliationPage.js";
 import { OverviewPage } from "./pages/overview/OverviewPage.js";
+import { NotFoundPage } from "./pages/not-found/NotFoundPage.js";
 
 // MK: /refunds route removed until FP-212
 export const router = createBrowserRouter([
+  // The site root has no page of its own: send visitors to the dashboard,
+  // whose guard redirects to /dashboard/login when there is no session.
+  { path: "/", element: <Navigate to="/dashboard" replace /> },
+
   { path: "/pay/:token", element: <CheckoutPage /> },
 
   {
@@ -101,4 +106,7 @@ export const router = createBrowserRouter([
       },
     ],
   },
+
+  // Anything else: a real page instead of React Router's error screen.
+  { path: "*", element: <NotFoundPage /> },
 ]);

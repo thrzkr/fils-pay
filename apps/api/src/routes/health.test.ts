@@ -46,3 +46,14 @@ test("GET /readyz reflects the module-scoped flag, not a live DB probe", async (
   const stillReady = await app.inject({ method: "GET", url: "/readyz" });
   assert.equal(stillReady.statusCode, 200);
 });
+
+/** The bare API address is a landing response, not a 404. */
+test("GET / describes the service instead of returning 404", async () => {
+  const res = await app.inject({ method: "GET", url: "/" });
+  assert.equal(res.statusCode, 200);
+  const body = res.json();
+  assert.equal(body.service, "filspay-api");
+  assert.equal(body.health, "/healthz");
+  assert.equal(body.readiness, "/readyz");
+  assert.equal(body.api, "/v1");
+});

@@ -8,6 +8,16 @@ import { isReady } from "../health/state.js";
  * platform behavior.
  */
 export async function healthRoutes(app: FastifyInstance): Promise<void> {
+  // GET / — what someone sees when they open the API address in a browser.
+  // A short pointer to the real endpoints instead of a bare 404.
+  app.get("/", async () => ({
+    service: "filspay-api",
+    status: "ok",
+    health: "/healthz",
+    readiness: "/readyz",
+    api: "/v1",
+  }));
+
   // GET /healthz — liveness. Never touches the database. Returns 200 as
   // long as the Node process is up and Fastify can handle a request.
   app.get("/healthz", async () => ({ status: "ok", uptimeSeconds: process.uptime() }));
